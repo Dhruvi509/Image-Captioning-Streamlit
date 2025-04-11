@@ -4,7 +4,6 @@ import uuid
 import shutil
 from PIL import Image
 from main import detect_objects, generate_caption, translate_text, text_to_speech
-import base64
 
 # Temp folders
 UPLOAD_FOLDER = "temp_uploads"
@@ -13,9 +12,9 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(AUDIO_FOLDER, exist_ok=True)
 
 # Title and description
-st.set_page_config(page_title="Echo Vision: Image Captioning App", layout="centered")
+st.set_page_config(page_title="Echo Vision", layout="centered")
 st.title("🧠 Echo Vision")
-st.write("Upload an image, get objects, caption, translation, and audio.")
+st.write("Upload an image, get objects, caption, translation and audio.")
 
 # File uploader
 uploaded_file = st.file_uploader("Choose an image", type=["jpg", "jpeg", "png"])
@@ -39,7 +38,7 @@ if uploaded_file:
         f.write(uploaded_file.read())
 
     # Display image
-    st.image(Image.open(img_path), caption="Uploaded Image", use_container_width=True)
+    st.image(Image.open(img_path), caption="Uploaded Image", use_column_width=True)
 
     with st.spinner("Detecting objects..."):
         objects = detect_objects(img_path)
@@ -60,12 +59,5 @@ if uploaded_file:
     st.markdown(f"**📝 Caption:** {caption}")
     st.markdown(f"**🌍 Translated ({language}):** {translated_caption}")
     
-    # Check if the audio file exists
     if audio_path and os.path.exists(audio_path):
-        # Convert the audio file to base64
-        with open(audio_path, "rb") as audio_file:
-            audio_base64 = base64.b64encode(audio_file.read()).decode()
-
-        # Embed audio player using HTML audio tag (works better on mobile)
-        audio_url = f"data:audio/mp3;base64,{audio_base64}"
-        st.markdown(f'<audio controls><source src="{audio_url}" type="audio/mp3"></audio>', unsafe_allow_html=True)
+        st.audio(audio_path, format="audio/mp3")
