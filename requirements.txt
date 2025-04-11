@@ -9,4 +9,4 @@ flask-cors
 streamlit
 gtts
 deep-translator
-opencv-python-headless  # only if still using it
+opencv-python-headless==4.7.0.72
