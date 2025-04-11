@@ -6,3 +6,7 @@ Pillow
 pyttsx3
 ultralytics
 flask-cors
+streamlit
+gtts
+deep-translator
+opencv-python-headless  # only if still using it
