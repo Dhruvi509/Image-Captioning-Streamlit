@@ -12,14 +12,14 @@ from urllib.request import urlretrieve
 if not os.path.exists("yolov8n.pt"):
     urlretrieve("https://github.com/ultralytics/assets/releases/download/v0.0.0/yolov8n.pt", "yolov8n.pt")
 
-# Load models once
+# Load models
 yolo_model = YOLO("yolov8n.pt")
 processor = BlipProcessor.from_pretrained("Salesforce/blip-image-captioning-base")
 caption_model = BlipForConditionalGeneration.from_pretrained("Salesforce/blip-image-captioning-base")
 
 def detect_objects(image_path):
     image = Image.open(image_path).convert("RGB")
-    image_np = np.array(image)  # YOLO expects NumPy arrays
+    image_np = np.array(image)
     results = yolo_model(image_np)
     detected_objects = []
     for result in results:
