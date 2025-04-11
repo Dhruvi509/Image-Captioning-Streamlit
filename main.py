@@ -1,3 +1,4 @@
+import cv2
 import torch
 import numpy as np
 from PIL import Image
@@ -18,9 +19,8 @@ processor = BlipProcessor.from_pretrained("Salesforce/blip-image-captioning-base
 caption_model = BlipForConditionalGeneration.from_pretrained("Salesforce/blip-image-captioning-base")
 
 def detect_objects(image_path):
-    image = Image.open(image_path).convert("RGB")
-    image_np = np.array(image)  # YOLO expects NumPy arrays
-    results = yolo_model(image_np)
+    image = cv2.imread(image_path)
+    results = yolo_model(image)
     detected_objects = []
     for result in results:
         for box in result.boxes:
