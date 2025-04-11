@@ -38,7 +38,9 @@ if uploaded_file:
         f.write(uploaded_file.read())
 
     # Display image
-    st.image(Image.open(img_path), caption="Uploaded Image", use_column_width=True)
+   # Display image
+    st.image(Image.open(img_path), caption="Uploaded Image", use_container_width=True)
+
 
     with st.spinner("Detecting objects..."):
         objects = detect_objects(img_path)
