@@ -1,0 +1,8 @@
+flask
+torch
+transformers
+opencv-python
+Pillow
+pyttsx3
+ultralytics
+flask-cors
