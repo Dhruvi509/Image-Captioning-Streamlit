@@ -1,6 +1,7 @@
 import streamlit as st
 import os
 import uuid
+import shutil
 from PIL import Image
 from main import detect_objects, generate_caption, translate_text, text_to_speech
 
@@ -12,14 +13,14 @@ os.makedirs(AUDIO_FOLDER, exist_ok=True)
 
 # Title and description
 st.set_page_config(page_title="Echo Vision: Image Captioning App", layout="centered")
-st.title("🧠 Echo Vision: Image Captioning + Object Detection + Audio")
-st.write("Upload an image, get objects, caption, translation, and audio.")
+st.title("🧠 Echo Vision")
+st.write("Upload an image, get objects, caption, translation and audio.")
 
 # File uploader
 uploaded_file = st.file_uploader("Choose an image", type=["jpg", "jpeg", "png"])
-language = st.selectbox("Select output language", [
-    "english", "hindi", "spanish", "french", "tamil", "gujarati", "telugu", "bengali",
-    "kannada", "malayalam", "marathi", "punjabi", "urdu", "chinese", "japanese", "korean", "german", "italian", "russian"
+language = st.selectbox("Select language", [
+    "en", "hi", "es", "fr", "ta", "gu", "te", "bn",
+    "kn", "ml", "mr", "pa", "ur", "zh-cn", "ja", "ko", "de", "it", "ru"
 ])
 
 if uploaded_file:
