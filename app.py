@@ -23,8 +23,6 @@ language = st.selectbox("Select language", [
     "kn", "ml", "mr", "pa", "ur", "zh-cn", "ja", "ko", "de", "it", "ru"
 ])
 
-
-
 if uploaded_file:
     # Clean previous uploads
     for f in os.listdir(UPLOAD_FOLDER):
