@@ -28,7 +28,7 @@ def detect_objects(image_path):
             label = result.names[class_id]
             detected_objects.append(label)
     return list(set(detected_objects))
-
+    
 def generate_caption(image_path):
     image = Image.open(image_path).convert("RGB")
     inputs = processor(image, return_tensors="pt")
