@@ -18,10 +18,31 @@ st.write("Upload an image, get objects, caption, translation and audio.")
 
 # File uploader
 uploaded_file = st.file_uploader("Choose an image", type=["jpg", "jpeg", "png"])
-language = st.selectbox("Select language", [
-    "en", "hi", "es", "fr", "ta", "gu", "te", "bn",
-    "kn", "ml", "mr", "pa", "ur", "zh-cn", "ja", "ko", "de", "it", "ru"
-])
+language_map = {
+    "English": "en",
+    "Hindi": "hi",
+    "Spanish": "es",
+    "French": "fr",
+    "Tamil": "ta",
+    "Gujarati": "gu",
+    "Telugu": "te",
+    "Bengali": "bn",
+    "Kannada": "kn",
+    "Malayalam": "ml",
+    "Marathi": "mr",
+    "Punjabi": "pa",
+    "Urdu": "ur",
+    "Chinese (Simplified)": "zh-cn",
+    "Japanese": "ja",
+    "Korean": "ko",
+    "German": "de",
+    "Italian": "it",
+    "Russian": "ru"
+}
+
+language_name = st.selectbox("Select language", list(language_map.keys()))
+language = language_map[language_name]
+
 
 if uploaded_file:
     # Clean previous uploads
@@ -59,7 +80,7 @@ if uploaded_file:
     st.success("✅ Done!")
     st.markdown(f"**🧩 Objects Detected:** {', '.join(objects)}")
     st.markdown(f"**📝 Caption:** {caption}")
-    st.markdown(f"**🌍 Translated ({language}):** {translated_caption}")
+    st.markdown(f"**🌍 Translated ({language_name}):** {translated_caption}")
     
     if audio_path and os.path.exists(audio_path):
         st.audio(audio_path, format="audio/mp3")
